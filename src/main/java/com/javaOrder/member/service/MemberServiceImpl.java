@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.javaOrder.common.service.IdGenerationService;
-import com.javaOrder.member.repository.MemberRepository;
 import com.javaOrder.member.vo.Member;
+import com.javaOrder.common.util.service.IdGenerationService;
+import com.javaOrder.member.domain.Member;
+import com.javaOrder.member.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,19 +23,17 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public void insertMemberCode(Member member) {
-		String memberCode = idGenerationService.generateId("M", "member_seq");
+		String memberCode = idGenerationService.generateId("M", "member_seq", 4);
 		member.setMemberCode(memberCode);
 		memberRepository.save(member);
 	}
-	
-	// 회원 목록
+
 	@Override
 	public List<Member> memberList() {
 		List<Member> memberList = memberRepository.findAll();
 		return memberList;
 	}
-	
-	// 회원 로그인
+
 	@Override
 	public Member Login(String memberId, String memberPassword) {
 		Member member = memberRepository.findByMemberId(memberId);

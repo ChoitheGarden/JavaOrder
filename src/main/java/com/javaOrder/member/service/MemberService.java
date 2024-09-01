@@ -3,6 +3,7 @@ package com.javaOrder.member.service;
 import java.util.List;
 
 import com.javaOrder.member.vo.Member;
+import com.javaOrder.member.domain.Member;
 
 public interface MemberService {
 	// 회원 추가 메서드
